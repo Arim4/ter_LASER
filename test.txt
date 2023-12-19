@@ -3,5 +3,10 @@ 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
 test de soren
 une autre lettre
 
+<<<<<<< HEAD
 je suis en vie
 je te fais chier
+=======
+je suis en vie*
+zefzefze
+>>>>>>> 38dbef826d931f4e4de09f4b3ab56a818dfa00d1
