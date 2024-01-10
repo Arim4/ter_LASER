@@ -1,0 +1,158 @@
+\documentclass{rapportECC}
+\usepackage{lipsum}
+\title{Rapport ECL - Template} %Titre du fichier
+\usepackage{lipsum} 
+\usepackage{biblatex} %Imports biblatex package
+\addbibresource{bibtex.bib} %Import the bibliography file
+\usepackage{appendix} % Package pour gérer les annexes
+\begin{document}
+
+%----------- Informations du rapport ---------
+
+\titre{Compte rendu TER semestre 5} %Titre du fichier .pdf
+
+\sujet{Sujet 9 : Étude de l’élévation thermique dans un multicouche exposé à un laser à impulsions } %Nom du sujet
+
+\Encadrants{Zouhir \textsc{Maslah}
+ \\Gaël \textsc{Poette} } %Nom de l'enseignant
+
+\eleves{Matéo \textsc{Ringeval} \\
+		Soren \textsc{Le Meitour} \\
+            Adrien \textsc{Mayeux - Morlans} \\
+		Mircea \textsc{Cathelin} } %Nom des élèves
+
+%----------- Initialisation -------------------
+        
+\fairemarges %Afficher les marges
+\fairepagedegarde %Créer la page de garde
+\tabledematieres %Créer la table de matières
+
+%------------ Corps du rapport ----------------
+
+
+\section{Présentation du sujet} 
+
+
+\subsection{Subsection}
+
+Ce projet vise à étudier l’élévation thermique induite par un laser à impulsion femtoseconde dans un échantillon multicouche. L’objectif est de déterminer le profil de température à travers ces trois couches et d’observer l’influence de la zone de focalisation ainsi que de la fréquence de tir du laser sur l’élévation thermique du système. Dans un premier temps, en vous basant sur l’équation de diffusion et les conditions limites, vous devrez déterminer l’élévation statique de la température. Pour cette partie, la source thermique sera considérée comme un laser continu. Dans une seconde partie, la source est désormais perçue comme une impulsion laser tirée à intervalles réguliers. Il vous faudra alors adapter les calculs précédents pour prendre en compte la nature périodique de cette source. Vous chercherez à comprendre l’influence de cette dernière sur l’élévation de température harmonique, mais aussi sur l’élévation statique, et à déterminer pourquoi le changement de fréquence de tir affecte l’élévation statique. Enfin, dans une dernière partie, le calcul analytique de l’élévation harmonique sera employé pour déduire la température à partir de mesures expérimentales d’acoustique picoseconde dans un tricouche (saphir-titane-eau). L’acoustique picoseconde est une technique qui utilise deux lasers pour émettre et détecter une onde acoustique. Cette mesure fournit un produit entre l’indice de réfraction et la célérité acoustique dans l’eau via la diffusion Brillouin. Ces deux paramètres sont liés à la température, offrant ainsi une mesure indirecte de cette dernière. Vous devrez réfléchir à une méthode pour comparer le calcul analytique aux résultats expérimentaux et déterminer l’élévation de température dans les conditions de mesure.
+
+
+\subsubsection{Subsubsection}
+
+
+
+\section{Premiere phase de recherche bibliographique}
+
+Nous avons tout d’abord dans un premier temps fait des recherches bibliographique pour trouver différentes formules.
+Nous recherchions les formules suivantes :
+
+\begin{itemize}
+    \item v  la vitesse du son dans l’eau en fonction de la température T
+    \item n l’indice de réfraction dans l’eau en fonction de la température T
+    \item f la fréquence Brillouin en fonction de v, n et T
+\end{itemize}
+
+Pour réaliser ces recherches nous avons cherché des thèses sur internet et celles qui nous on permis de trouver ces formules sont les suivantes,
+
+
+\subsection{Formules obtenues}
+
+Nous avons donc pu en tirer les formules suivantes :
+
+Pour la vitesse du son dans un liquide
+\begin{equation}
+    v = \sqrt{\frac{1}{\rho \beta_{ad}}}
+\end{equation}
+où $\rho$ est la masse vlumique de l'eau et $\beta_{ad}$ est compressibilité adiabatique
+
+Pour l'indice de réfraction 
+\begin{equation}
+    -\frac{\partial n}{\partial t} = B(1-exp(-\frac{t-t_0}{t_k}))
+\end{equation}
+avec $B=26,2*10^{-5} K^{-1}, t_0$ = 20 °C et h = 48,5 °C
+
+\\
+Enfin la formule de la fréquence Brillouin
+\begin{equation}
+    f_B = \frac{2vn}{\lambda}\sqrt{1-\frac{\sin^2{\theta}}{n^2}}
+\end{equation}
+
+Mais dans notre cas, le laser est perpendiculaire à la source donc nous pouvons simplifier notre formule de $f_B$ pour obtenir :
+\begin{equation}
+    f_B =  \frac{2vn}{\lambda}
+\end{equation}
+
+
+
+
+
+%------------- Commandes utiles ----------------
+
+\section{Quelques commandes}
+
+Voici quelques commandes utiles : \cite{Lamport}
+
+%------ Pour insérer et citer une image centralisée -----
+
+\insererfigure{logos/Logo_ECC}{3cm}{Légende de la figure}{Label de la figure}
+% Le premier argument est le chemin pour la photo
+% Le deuxième est la hauteur de la photo
+% Le troisième la légende
+% Le quatrième le label
+Ici, je cite l'image \ref{fig: Label de la figure}
+
+
+%------- Pour insérer et citer une équation --------------
+
+\begin{equation} \label{eq: exemple}
+\rho + \Delta = 42
+\end{equation}
+
+L'équation \ref{eq: exemple} est cité ici. 
+
+% ------- Pour écrire des variables ----------------------
+
+Pour écrire des variables dans le texte, il suffit de mettre le symbole \$ entre le texte souhaité comme : constante $\rho$. \cite{Companion}
+
+\section{Conclusion et Perspectives}
+\lipsum[1-2] \cite{matsumoto_tracking_2013}
+
+\newpage
+
+
+\printbibliography
+
+% Ajout de l'annexe
+\newpage
+\begin{appendices}
+\section{Annexe : }
+Dans cette section de l'annexe, nous fournissons des détails supplémentaires.
+
+% Ajout d'un tableau
+\subsection{Tableau additionnel}
+Voici un exemple de tableau :
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|}
+    \hline
+    Colonne 1 & Colonne 2 \\
+    \hline
+    Donnée A & 1 \\
+    Donnée B & 2 \\
+    \hline
+    \end{tabular}
+    \caption{Exemple de tableau}
+\end{table}
+
+% Ajout d'une image
+\subsection{Graphique complémentaire}
+Voici un exemple d'insertion d'une image :
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{logos/centrale.png}
+    \caption{Légende de l'image}
+\end{figure}
+\end{appendices}
+
+\end{document}
