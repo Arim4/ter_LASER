@@ -32,20 +32,19 @@
 
 \section{Présentation du sujet} 
 
+\subsection{Introduction}
 
-\subsection{Subsection}
+Le but de ce projet est d'étudier l'élévation thermique dans un multicouche soumis à des impulsions laser courtes (de l'ordre de la femtoseconde). Pour cela, nous nous baserons sur les données obtenues durant l'expérience décrite en partie 3 et réaliserons un modèle sous fortran90.
 
-Ce projet vise à étudier l’élévation thermique induite par un laser à impulsion femtoseconde dans un échantillon multicouche. L’objectif est de déterminer le profil de température à travers ces trois couches et d’observer l’influence de la zone de focalisation ainsi que de la fréquence de tir du laser sur l’élévation thermique du système. Dans un premier temps, en vous basant sur l’équation de diffusion et les conditions limites, vous devrez déterminer l’élévation statique de la température. Pour cette partie, la source thermique sera considérée comme un laser continu. Dans une seconde partie, la source est désormais perçue comme une impulsion laser tirée à intervalles réguliers. Il vous faudra alors adapter les calculs précédents pour prendre en compte la nature périodique de cette source. Vous chercherez à comprendre l’influence de cette dernière sur l’élévation de température harmonique, mais aussi sur l’élévation statique, et à déterminer pourquoi le changement de fréquence de tir affecte l’élévation statique. Enfin, dans une dernière partie, le calcul analytique de l’élévation harmonique sera employé pour déduire la température à partir de mesures expérimentales d’acoustique picoseconde dans un tricouche (saphir-titane-eau). L’acoustique picoseconde est une technique qui utilise deux lasers pour émettre et détecter une onde acoustique. Cette mesure fournit un produit entre l’indice de réfraction et la célérité acoustique dans l’eau via la diffusion Brillouin. Ces deux paramètres sont liés à la température, offrant ainsi une mesure indirecte de cette dernière. Vous devrez réfléchir à une méthode pour comparer le calcul analytique aux résultats expérimentaux et déterminer l’élévation de température dans les conditions de mesure.
+\subsection{Démarche}
 
+Nous avons choisis pour démarche de commencer par faire des recherches bibliographiques afin d'obtenir une équation pour la fréquence Brillouin ainsi que des valeurs des différentes variables en fonction de la température. Puis, nous avons réalisé l'expérience afin de récolter des données qui nous seront utiles dans la suite pour vérifier notre modèle. Vient ensuite la construction du modèle à partir de l'équation différentielle de la chaleur. Pour ce faire, nous avons commencé par la résoudre pour notre système. Nous prévoyons pour la suite de finir le modèle.
 
-\subsubsection{Subsubsection}
-
-
+%Ce projet vise à étudier l’élévation thermique induite par un laser à impulsion femtoseconde dans un échantillon multicouche. L’objectif est de déterminer le profil de température à travers ces trois couches et d’observer l’influence de la zone de focalisation ainsi que de la fréquence de tir du laser sur l’élévation thermique du système. Dans un premier temps, en vous basant sur l’équation de diffusion et les conditions limites, vous devrez déterminer l’élévation statique de la température. Pour cette partie, la source thermique sera considérée comme un laser continu. Dans une seconde partie, la source est désormais perçue comme une impulsion laser tirée à intervalles réguliers. Il vous faudra alors adapter les calculs précédents pour prendre en compte la nature périodique de cette source. Vous chercherez à comprendre l’influence de cette dernière sur l’élévation de température harmonique, mais aussi sur l’élévation statique, et à déterminer pourquoi le changement de fréquence de tir affecte l’élévation statique. Enfin, dans une dernière partie, le calcul analytique de l’élévation harmonique sera employé pour déduire la température à partir de mesures expérimentales d’acoustique picoseconde dans un tricouche (saphir-titane-eau). L’acoustique picoseconde est une technique qui utilise deux lasers pour émettre et détecter une onde acoustique. Cette mesure fournit un produit entre l’indice de réfraction et la célérité acoustique dans l’eau via la diffusion Brillouin. Ces deux paramètres sont liés à la température, offrant ainsi une mesure indirecte de cette dernière. Vous devrez réfléchir à une méthode pour comparer le calcul analytique aux résultats expérimentaux et déterminer l’élévation de température dans les conditions de mesure.
 
 \section{Premiere phase de recherche bibliographique}
 
-Nous avons tout d’abord dans un premier temps fait des recherches bibliographique pour trouver différentes formules.
-Nous recherchions les formules suivantes :
+Nous avons tout d’abord fait des recherches bibliographique pour trouver les formules suivantes :
 
 \begin{itemize}
     \item v  la vitesse du son dans l’eau en fonction de la température T
@@ -53,7 +52,8 @@ Nous recherchions les formules suivantes :
     \item f la fréquence Brillouin en fonction de v, n et T
 \end{itemize}
 
-Pour réaliser ces recherches nous avons cherché des thèses sur internet et celles qui nous on permis de trouver ces formules sont les suivantes,
+Toutes ces informations proviennent ainsi des articles suivants trouvés sur internet :
+\cite{}
 
 
 \subsection{Formules obtenues}
@@ -72,7 +72,6 @@ Pour l'indice de réfraction
 \end{equation}
 avec $B=26,2*10^{-5} K^{-1}, t_0$ = 20 °C et h = 48,5 °C
 
-\\
 Enfin la formule de la fréquence Brillouin
 \begin{equation}
     f_B = \frac{2vn}{\lambda}\sqrt{1-\frac{\sin^2{\theta}}{n^2}}
@@ -85,7 +84,7 @@ Mais dans notre cas, le laser est perpendiculaire à la source donc nous pouvons
 
 \section{Expérience}
 
-
+Le principe de l'expérience est d'envoyer un laser source à impulsions sur le multicouche (saphir, titane, eau) en passant par le saphir ce qui provoque une élévation de température et donc une dilatations thermique associée à une onde mécanique mesurées à l'aide de deux lasers source. Nous avons ainsi récupéré des valeurs d'intensité lumineuse (réflexion des deux laser sonde) sur une grille de 6x6 pour 5k intervalles de temps.
 
 \section{Recherche de modèle}
 
@@ -112,7 +111,7 @@ Cela nous permet d'avoir une expression de T comme celle-ci :
 \begin{equation}
     \frac{\partial^2 T(z)}{\partial z^2} - k^2 T = \frac{1}{\kappa_1}Q_i(z)
 \end{equation}
-Avec $Q_i$ = $\beta_i e{-\beta_i z}$
+Avec $Q_i$ = $\beta_i e^{-\beta_i z}$
 
 
 Ainsi nous nous retrouvons à résoudre une équation différentiel du second ordre.\\
@@ -120,18 +119,16 @@ Nous avons choisis de la résoudre en utilisant variation de la constante.
 
 Comme notre problème comporte 3 milieux différentes,
 \begin{itemize}
-    \item Le milieu (0) étant celui du 
+    \item Le milieu (0) étant celui du saphir
     \item Le milieu (1) étant celui du Titane
     \item Le milieu (2) étant celui de l'eau
 \end{itemize}
 
-Les milieux (0) et (2) sont semi-infinis en z et le laser ne provoque pas d'échauffement dans ces milieux, le terme source $Q_i$ est donc nul, ainsi, dans ces deux milieux l'équation devient :
+Le laser ne provoque pas d'échauffement dans les milieux (0) et (2) du fait de leur transparence, le terme source $Q_i$ est donc nul, ainsi, dans ces deux milieux l'équation devient :
 
 \begin{equation}
     \frac{\partial^2 T(z)}{\partial z^2} - k^2 T = 0
 \end{equation}
-
-"expliquer pq on simplifie (0) et (2)"
 
 Ainsi, nous nous retrouvons à simplifier encore plus l'équation dans le cas (0) et (2) et n'avoir seulement besoin de $T_h$
 
@@ -166,13 +163,13 @@ On effectue une nouvelle fois la variation de la constante :
 ce qui donne
 \begin{equation*}
    B'(z)e^{-2kz} = -\frac{1}{\kappa_1}\beta_1 e^{-(\beta_1+k)z}\\
-   -> B'(z) = -\frac{1}{\kappa_1}\beta_1 e^{(k-\beta_1)z}
-   -> B(z) = \frac{\beta_1}{\kappa_1(k-\beta_1)}e^{(k-\beta_1)z} + C
+   \xrightarrow{} B'(z) = -\frac{1}{\kappa_1}\beta_1 e^{(k-\beta_1)z}
+   \xrightarrow{} B(z) = \frac{\beta_1}{\kappa_1(k-\beta_1)}e^{(k-\beta_1)z} + C
 \end{equation*}
 On a donc l'expression de $A'(z)$
 \begin{equation*}
    A'(z)=(B+C)e^{-2kz} -\frac{-\beta_1}{\kappa_1(k-\beta_1)} e^{-(\beta_1+k)z}\\
-   -> A(z) = -\frac{B+C}{2k}e^{-2kz}+\frac{\beta_1}{\kappa_1(k^2-\beta_1^2)} e^{-(\beta_1+k)z}
+   \xrightarrow{} A(z) = -\frac{B+C}{2k}e^{-2kz}+\frac{\beta_1}{\kappa_1(k^2-\beta_1^2)} e^{-(\beta_1+k)z}
 \end{equation*}
 On obtient ainsi $T(z) = T_p + T_h$
 \begin{equation*}
@@ -200,37 +197,37 @@ On obtient ainsi $T(z) = T_p + T_h$
 
 
 
-%------------- Commandes utiles ----------------
+% %------------- Commandes utiles ----------------
 
 
 
-Voici quelques commandes utiles : \cite{Lamport}
+% Voici quelques commandes utiles : \cite{Lamport}
 
-%------ Pour insérer et citer une image centralisée -----
+% %------ Pour insérer et citer une image centralisée -----
 
-\insererfigure{logos/Logo_ECC}{3cm}{Légende de la figure}{Label de la figure}
-% Le premier argument est le chemin pour la photo
-% Le deuxième est la hauteur de la photo
-% Le troisième la légende
-% Le quatrième le label
-Ici, je cite l'image \ref{fig: Label de la figure}
+% \insererfigure{logos/Logo_ECC}{3cm}{Légende de la figure}{Label de la figure}
+% % Le premier argument est le chemin pour la photo
+% % Le deuxième est la hauteur de la photo
+% % Le troisième la légende
+% % Le quatrième le label
+% Ici, je cite l'image \ref{fig: Label de la figure}
 
 
-%------- Pour insérer et citer une équation --------------
+% %------- Pour insérer et citer une équation --------------
 
-\begin{equation} \label{eq: exemple}
-\rho + \Delta = 42
-\end{equation}
+% \begin{equation} \label{eq: exemple}
+% \rho + \Delta = 42
+% \end{equation}
 
-L'équation \ref{eq: exemple} est cité ici. 
+% L'équation \ref{eq: exemple} est cité ici. 
 
-% ------- Pour écrire des variables ----------------------
+% % ------- Pour écrire des variables ----------------------
 
-Pour écrire des variables dans le texte, il suffit de mettre le symbole \$ entre le texte souhaité comme : constante $\rho$. \cite{Companion}
+% Pour écrire des variables dans le texte, il suffit de mettre le symbole \$ entre le texte souhaité comme : constante $\rho$. \cite{Companion}
 
 
 \section{Conclusion et Perspectives}
-\lipsum[1-2] \cite{matsumoto_tracking_2013}
+
 
 \newpage
 
