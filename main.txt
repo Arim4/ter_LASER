@@ -83,13 +83,115 @@ Mais dans notre cas, le laser est perpendiculaire à la source donc nous pouvons
     f_B =  \frac{2vn}{\lambda}
 \end{equation}
 
+\section{Expérience}
+
+\section{Recherche de modèle}
+
+\subsection{Expression de T}
+
+En partant de la formule de 
+
+Comme nous cherchons à déterminer l’élévation de la température statique,
+nous utiliserons la transformée de Fourier pour passer dans le domaine
+fréquentiel. Nous utiliserons également la transformée de Hankel pour convertir
+l’équation aux dérivées partielles en une équation aux dérivées ordinaires.
+L’équation (1) devient alors :
+
+\begin{equation}
+    \frac{\partial^2 T(k,z,\omega)}{\partial z^2} - (k^2 + j\frac{\omega}{\alpha}) T(k,z,\omega) = - \frac{1}{\kappa_1} Q_i(k,z,\omega)
+\end{equation}
+
+Cependant donc notre cas nous pouvons faire des hypothéses simplificatrices.
+
+Ainsi, nous pouvons négliger la partiel imaginaire de l'équation donc négliger la dépendance en $\omega$ et z de l'équation.
+
+Cela nous permet d'avoir une expression de T comme celle-ci :
+
+\begin{equation}
+    \frac{\partia^2 T(z)}{\partial z^2} - k^2 T = \frac{1}{\kappa_1}Q_i(z)
+\end{equation}
+Avec $Q_i$ = $\beta_i e{-\beta_i z}$
+
+
+Ainsi nous nous retrouvons à résoudre une équation différentiel du second ordre.\\
+Nous avons choisis de la résoudre en utilisant variation de la constante.
+
+Comme notre problème comporte 3 milieux différentes,
+\begin{itemize}
+    \item Le milieu (0) étant celui du 
+    \item Le milieu (1) étant celui du Titane
+    \item Le milieu (2) étant celui de l'eau
+\end{itemize}
+
+Les milieux (0) et (2) sont semi-infinis en z 
+
+"expliquer pq on simplifie (0) et (2)"
+
+Ainsi, nous nous retrouvons à simplifier encore plus l'équation dans le cas (0) et (2) et n'avoir seulement besoin de $T_h$
+
+\begin{equation*}
+    \frac{d^2 T(z)}{d z^2} - k^2 T(z) = - \frac{1}{\kappa_1}\beta_i e^{-\beta_iz}
+\end{equation*}
+
+d'où,
+\begin{equation}
+    T_h = A e^{kz} 
+\end{equation}
+avec A $\in \mathbb{R}$
+
+Enfin pour calculer $T_P$ on utilise la variation de la constante ce qui nous donne :
+
+\begin{equation*}
+            T_P = A''(z)exp(kz) + 2k A'(z) = - \frac{1}{\kappa_1}\beta_i e{-\beta_iz} 
+\end{equation*}
+
+\begin{equation*}
+            => - \frac{1}{\kappa_1}\beta_i e^{(-\beta_i + k)z} = A''(z) + 2k A'(z)
+\end{equation*}
+
+On effectue une nouvelle fois la variation de la constante :
+
+\begin{equation*}
+    A'_h = B e^{-2kz}
+\end{equation*}
+\begin{equation*}
+    A'_p = B(z) e^{-2kz}
+\end{equation*}
+ce qui donne
+\begin{equation*}
+   B'(z)e^{-2kz} = -\frac{1}{\kappa_1}\beta_1 e^{(-(\beta_1+k)z}\\
+   -> B'(z) = -\frac{1}{\kappa_1}\beta_1 e^{(k-\beta_1)z}
+   -> B(z) = \frac{\beta_1}{\kappa_1(k-\beta_1}e^{(k-\beta_1)z} + C
+\end{equation*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 %------------- Commandes utiles ----------------
 
-\section{Quelques commandes}
+
 
 Voici quelques commandes utiles : \cite{Lamport}
 
@@ -114,6 +216,7 @@ L'équation \ref{eq: exemple} est cité ici.
 % ------- Pour écrire des variables ----------------------
 
 Pour écrire des variables dans le texte, il suffit de mettre le symbole \$ entre le texte souhaité comme : constante $\rho$. \cite{Companion}
+
 
 \section{Conclusion et Perspectives}
 \lipsum[1-2] \cite{matsumoto_tracking_2013}
