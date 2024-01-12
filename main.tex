@@ -85,6 +85,8 @@ Mais dans notre cas, le laser est perpendiculaire à la source donc nous pouvons
 
 \section{Expérience}
 
+
+
 \section{Recherche de modèle}
 
 \subsection{Expression de T}
@@ -108,7 +110,7 @@ Ainsi, nous pouvons négliger la partiel imaginaire de l'équation donc néglige
 Cela nous permet d'avoir une expression de T comme celle-ci :
 
 \begin{equation}
-    \frac{\partia^2 T(z)}{\partial z^2} - k^2 T = \frac{1}{\kappa_1}Q_i(z)
+    \frac{\partial^2 T(z)}{\partial z^2} - k^2 T = \frac{1}{\kappa_1}Q_i(z)
 \end{equation}
 Avec $Q_i$ = $\beta_i e{-\beta_i z}$
 
@@ -123,7 +125,11 @@ Comme notre problème comporte 3 milieux différentes,
     \item Le milieu (2) étant celui de l'eau
 \end{itemize}
 
-Les milieux (0) et (2) sont semi-infinis en z 
+Les milieux (0) et (2) sont semi-infinis en z et le laser ne provoque pas d'échauffement dans ces milieux, le terme source $Q_i$ est donc nul, ainsi, dans ces deux milieux l'équation devient :
+
+\begin{equation}
+    \frac{\partial^2 T(z)}{\partial z^2} - k^2 T = 0
+\end{equation}
 
 "expliquer pq on simplifie (0) et (2)"
 
@@ -142,7 +148,7 @@ avec A $\in \mathbb{R}$
 Enfin pour calculer $T_P$ on utilise la variation de la constante ce qui nous donne :
 
 \begin{equation*}
-            T_P = A''(z)exp(kz) + 2k A'(z) = - \frac{1}{\kappa_1}\beta_i e{-\beta_iz} 
+            T_P = A''(z)e^{(kz)} + 2k A'(z)e^{(kz)} = - \frac{1}{\kappa_1}\beta_i e^{-\beta_iz} 
 \end{equation*}
 
 \begin{equation*}
@@ -159,14 +165,19 @@ On effectue une nouvelle fois la variation de la constante :
 \end{equation*}
 ce qui donne
 \begin{equation*}
-   B'(z)e^{-2kz} = -\frac{1}{\kappa_1}\beta_1 e^{(-(\beta_1+k)z}\\
+   B'(z)e^{-2kz} = -\frac{1}{\kappa_1}\beta_1 e^{-(\beta_1+k)z}\\
    -> B'(z) = -\frac{1}{\kappa_1}\beta_1 e^{(k-\beta_1)z}
-   -> B(z) = \frac{\beta_1}{\kappa_1(k-\beta_1}e^{(k-\beta_1)z} + C
+   -> B(z) = \frac{\beta_1}{\kappa_1(k-\beta_1)}e^{(k-\beta_1)z} + C
 \end{equation*}
-
-
-
-
+On a donc l'expression de $A'(z)$
+\begin{equation*}
+   A'(z)=(B+C)e^{-2kz} -\frac{-\beta_1}{\kappa_1(k-\beta_1)} e^{-(\beta_1+k)z}\\
+   -> A(z) = -\frac{B+C}{2k}e^{-2kz}+\frac{\beta_1}{\kappa_1(k^2-\beta_1^2)} e^{-(\beta_1+k)z}
+\end{equation*}
+On obtient ainsi $T(z) = T_p + T_h$
+\begin{equation*}
+            T(z) = \left[A+\frac{\beta_1}{\kappa_1(k^2-\beta_1^2)}e^{-(\beta_1+k)z}-\frac{B+C}{2k}e^{-2kz}+D\right]e^{kz} 
+\end{equation*}
 
 
 
