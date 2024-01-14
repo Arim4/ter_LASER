@@ -52,8 +52,12 @@ Nous avons tout d’abord fait des recherches bibliographique pour trouver les f
     \item f la fréquence Brillouin en fonction de v, n et T
 \end{itemize}
 
-Toutes ces informations proviennent ainsi des articles suivants trouvés sur internet :
-\cite{}
+Toutes ces informations proviennent ainsi des articles suivants trouvés sur internet :\\
+
+Time-domain Brillouin scattering assisted by diffraction gratings pour la formule de la fréquence Brillouin.\\
+The temperature dependence of the refractive index of water pour la formule de l'indice de réfraction.\\
+Enfin, Temperature Dependance of the velocity of sound in liquids pour la formule de la vitesse du son dans l'eau.
+
 
 
 \subsection{Formules obtenues}
@@ -84,27 +88,20 @@ Mais dans notre cas, le laser est perpendiculaire à la source donc nous pouvons
 
 \section{Expérience}
 
-Le principe de l'expérience est d'envoyer un laser source à impulsions sur le multicouche (saphir, titane, eau) en passant par le saphir ce qui provoque une élévation de température et donc une dilatations thermique associée à une onde mécanique mesurées à l'aide de deux lasers source. Nous avons ainsi récupéré des valeurs d'intensité lumineuse (réflexion des deux laser sonde) sur une grille de 6x6 pour 5k intervalles de temps.
+Le principe de l'expérience est d'envoyer un laser source à impulsions sur le multicouche (saphir, titane, eau) en passant par le saphir ce qui provoque une élévation de température et donc une dilatation thermique associée à une onde mécanique mesurée à l'aide de deux lasers source. Nous avons ainsi récupéré des valeurs d'intensité lumineuse (réflexion des deux lasers sonde) sur une grille de 6x6 pour 5 000 intervalles de temps.
 
 \section{Recherche de modèle}
 
 \subsection{Expression de T}
 
-En partant de la formule de 
-
-Comme nous cherchons à déterminer l’élévation de la température statique,
-nous utiliserons la transformée de Fourier pour passer dans le domaine
-fréquentiel. Nous utiliserons également la transformée de Hankel pour convertir
-l’équation aux dérivées partielles en une équation aux dérivées ordinaires.
-L’équation (1) devient alors :
+En partant de la formule qui nous à était fournie :
 
 \begin{equation}
     \frac{\partial^2 T(k,z,\omega)}{\partial z^2} - (k^2 + j\frac{\omega}{\alpha}) T(k,z,\omega) = - \frac{1}{\kappa_1} Q_i(k,z,\omega)
 \end{equation}
+Nous avons pu calculer une expression de T. Cependant donc notre cas nous pouvons faire des hypothèses simplificatrices.
 
-Cependant donc notre cas nous pouvons faire des hypothéses simplificatrices.
-
-Ainsi, nous pouvons négliger la partiel imaginaire de l'équation donc négliger la dépendance en $\omega$ et z de l'équation.
+Ainsi, nous pouvons négliger la partie imaginaire de l'équation donc négliger la dépendance en $\omega$ et z de l'équation.
 
 Cela nous permet d'avoir une expression de T comme celle-ci :
 
@@ -114,8 +111,8 @@ Cela nous permet d'avoir une expression de T comme celle-ci :
 Avec $Q_i$ = $\beta_i e^{-\beta_i z}$
 
 
-Ainsi nous nous retrouvons à résoudre une équation différentiel du second ordre.\\
-Nous avons choisis de la résoudre en utilisant variation de la constante.
+Ainsi nous nous retrouvons à résoudre une équation différentielle du second ordre.\\
+Nous avons choisi de la résoudre en utilisant variation de la constante.
 
 Comme notre problème comporte 3 milieux différentes,
 \begin{itemize}
