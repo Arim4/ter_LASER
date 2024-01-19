@@ -34,13 +34,12 @@
 
 \subsection{Introduction}
 
-Le but de ce projet est d'étudier l'élévation thermique dans un multicouche soumis à des impulsions laser courtes (de l'ordre de la femtoseconde). Pour cela, nous nous baserons sur les données obtenues durant l'expérience décrite en partie 3 et réaliserons un modèle sous fortran90.
+Le but de ce projet est d'étudier l'élévation thermique dans un multicouche soumis à des impulsions laser courtes (de l'ordre de la femtoseconde) à l'aide d'un second laser. L'avantage de ce genre de méthodes est qu'elles permettent par exemple de mesurer de manière précise la température de micro-composants électroniques. 
+Afin de réaliser cette étude, nous nous baserons sur les données obtenues durant l'expérience décrite en partie 3 et réaliserons un modèle sous fortran90. Pour évaluer la pertinence de notre modèle nous ferons des évaluations de fréquence Brillouin.
 
 \subsection{Démarche}
 
-Nous avons choisis pour démarche de commencer par faire des recherches bibliographiques afin d'obtenir une équation pour la fréquence Brillouin ainsi que des valeurs des différentes variables en fonction de la température. Puis, nous avons réalisé l'expérience afin de récolter des données qui nous seront utiles dans la suite pour vérifier notre modèle. Vient ensuite la construction du modèle à partir de l'équation différentielle de la chaleur. Pour ce faire, nous avons commencé par la résoudre pour notre système. Nous prévoyons pour la suite de finir le modèle.
-
-%Ce projet vise à étudier l’élévation thermique induite par un laser à impulsion femtoseconde dans un échantillon multicouche. L’objectif est de déterminer le profil de température à travers ces trois couches et d’observer l’influence de la zone de focalisation ainsi que de la fréquence de tir du laser sur l’élévation thermique du système. Dans un premier temps, en vous basant sur l’équation de diffusion et les conditions limites, vous devrez déterminer l’élévation statique de la température. Pour cette partie, la source thermique sera considérée comme un laser continu. Dans une seconde partie, la source est désormais perçue comme une impulsion laser tirée à intervalles réguliers. Il vous faudra alors adapter les calculs précédents pour prendre en compte la nature périodique de cette source. Vous chercherez à comprendre l’influence de cette dernière sur l’élévation de température harmonique, mais aussi sur l’élévation statique, et à déterminer pourquoi le changement de fréquence de tir affecte l’élévation statique. Enfin, dans une dernière partie, le calcul analytique de l’élévation harmonique sera employé pour déduire la température à partir de mesures expérimentales d’acoustique picoseconde dans un tricouche (saphir-titane-eau). L’acoustique picoseconde est une technique qui utilise deux lasers pour émettre et détecter une onde acoustique. Cette mesure fournit un produit entre l’indice de réfraction et la célérité acoustique dans l’eau via la diffusion Brillouin. Ces deux paramètres sont liés à la température, offrant ainsi une mesure indirecte de cette dernière. Vous devrez réfléchir à une méthode pour comparer le calcul analytique aux résultats expérimentaux et déterminer l’élévation de température dans les conditions de mesure.
+Nous avons choisis comme démarche de commencer par faire des recherches bibliographiques afin d'obtenir une équation pour la fréquence Brillouin ainsi que des valeurs des différentes variables en fonction de la température. Puis, nous avons réalisé l'expérience afin de récolter des données qui nous seront utiles dans la suite pour vérifier notre modèle. Vient ensuite la construction du modèle à partir de l'équation différentielle de la chaleur. Pour ce faire, nous avons commencé par la résoudre pour notre système. Nous prévoyons pour la suite de finir le modèle.
 
 \section{Premiere phase de recherche bibliographique}
 
@@ -52,12 +51,8 @@ Nous avons tout d’abord fait des recherches bibliographique pour trouver les f
     \item f la fréquence Brillouin en fonction de v, n et T
 \end{itemize}
 
-Toutes ces informations proviennent ainsi des articles suivants trouvés sur internet :\\
-
-Time-domain Brillouin scattering assisted by diffraction gratings pour la formule de la fréquence Brillouin.\\
-The temperature dependence of the refractive index of water pour la formule de l'indice de réfraction.\\
-Enfin, Temperature Dependance of the velocity of sound in liquids pour la formule de la vitesse du son dans l'eau.
-
+Toutes ces informations proviennent ainsi des articles suivants trouvés sur internet :
+\cite{}
 
 
 \subsection{Formules obtenues}
@@ -88,20 +83,27 @@ Mais dans notre cas, le laser est perpendiculaire à la source donc nous pouvons
 
 \section{Expérience}
 
-Le principe de l'expérience est d'envoyer un laser source à impulsions sur le multicouche (saphir, titane, eau) en passant par le saphir ce qui provoque une élévation de température et donc une dilatation thermique associée à une onde mécanique mesurée à l'aide de deux lasers source. Nous avons ainsi récupéré des valeurs d'intensité lumineuse (réflexion des deux lasers sonde) sur une grille de 6x6 pour 5 000 intervalles de temps.
+Le principe de l'expérience est d'envoyer un laser source à impulsions sur le multicouche (saphir, titane, eau) en passant par le saphir ce qui provoque une élévation de température et donc une dilatations thermique associée à une onde mécanique mesurées à l'aide de deux lasers source. Nous avons ainsi récupéré des valeurs d'intensité lumineuse (réflexion des deux laser sonde) sur une grille de 6x6 pour 5k intervalles de temps.
 
 \section{Recherche de modèle}
 
 \subsection{Expression de T}
 
-En partant de la formule qui nous à était fournie :
+En partant de la formule de 
+
+Comme nous cherchons à déterminer l’élévation de la température statique,
+nous utiliserons la transformée de Fourier pour passer dans le domaine
+fréquentiel. Nous utiliserons également la transformée de Hankel pour convertir
+l’équation aux dérivées partielles en une équation aux dérivées ordinaires.
+L’équation (1) devient alors :
 
 \begin{equation}
     \frac{\partial^2 T(k,z,\omega)}{\partial z^2} - (k^2 + j\frac{\omega}{\alpha}) T(k,z,\omega) = - \frac{1}{\kappa_1} Q_i(k,z,\omega)
 \end{equation}
-Nous avons pu calculer une expression de T. Cependant donc notre cas nous pouvons faire des hypothèses simplificatrices.
 
-Ainsi, nous pouvons négliger la partie imaginaire de l'équation donc négliger la dépendance en $\omega$ et z de l'équation.
+Cependant donc notre cas nous pouvons faire des hypothéses simplificatrices.
+
+Ainsi, nous pouvons négliger la partiel imaginaire de l'équation donc négliger la dépendance en $\omega$ et z de l'équation.
 
 Cela nous permet d'avoir une expression de T comme celle-ci :
 
@@ -111,8 +113,8 @@ Cela nous permet d'avoir une expression de T comme celle-ci :
 Avec $Q_i$ = $\beta_i e^{-\beta_i z}$
 
 
-Ainsi nous nous retrouvons à résoudre une équation différentielle du second ordre.\\
-Nous avons choisi de la résoudre en utilisant variation de la constante.
+Ainsi nous nous retrouvons à résoudre une équation différentiel du second ordre.\\
+Nous avons choisis de la résoudre en utilisant variation de la constante.
 
 Comme notre problème comporte 3 milieux différentes,
 \begin{itemize}
@@ -169,19 +171,98 @@ On a donc l'expression de $A'(z)$
    \xrightarrow{} A(z) = -\frac{B+C}{2k}e^{-2kz}+\frac{\beta_1}{\kappa_1(k^2-\beta_1^2)} e^{-(\beta_1+k)z}
 \end{equation*}
 On obtient ainsi $T(z) = T_p + T_h$
-\begin{equation}
+\begin{equation*}
             T(z) = \left[A+\frac{\beta_1}{\kappa_1(k^2-\beta_1^2)}e^{-(\beta_1+k)z}-\frac{B+C}{2k}e^{-2kz}+D\right]e^{kz} 
-\end{equation}
+\end{equation*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% %------------- Commandes utiles ----------------
+
+
+
+% Voici quelques commandes utiles : \cite{Lamport}
+
+% %------ Pour insérer et citer une image centralisée -----
+
+% \insererfigure{logos/Logo_ECC}{3cm}{Légende de la figure}{Label de la figure}
+% % Le premier argument est le chemin pour la photo
+% % Le deuxième est la hauteur de la photo
+% % Le troisième la légende
+% % Le quatrième le label
+% Ici, je cite l'image \ref{fig: Label de la figure}
+
+
+% %------- Pour insérer et citer une équation --------------
+
+% \begin{equation} \label{eq: exemple}
+% \rho + \Delta = 42
+% \end{equation}
+
+% L'équation \ref{eq: exemple} est cité ici. 
+
+% % ------- Pour écrire des variables ----------------------
+
+% Pour écrire des variables dans le texte, il suffit de mettre le symbole \$ entre le texte souhaité comme : constante $\rho$. \cite{Companion}
 
 
 \section{Conclusion et Perspectives}
 
-En conclusion, nous pouvons dire que la partie de travail réaliser pour l’instant était celle de recherche. Désormais il nous reste à implémenter numériquement notre modèle et à le comparer avec les résultats obtenus expérimentalement.
 
 \newpage
 
 
 \printbibliography
 
+% Ajout de l'annexe
+\newpage
+\begin{appendices}
+\section{Annexe : }
+Dans cette section de l'annexe, nous fournissons des détails supplémentaires.
+
+% Ajout d'un tableau
+\subsection{Tableau additionnel}
+Voici un exemple de tableau :
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|}
+    \hline
+    Colonne 1 & Colonne 2 \\
+    \hline
+    Donnée A & 1 \\
+    Donnée B & 2 \\
+    \hline
+    \end{tabular}
+    \caption{Exemple de tableau}
+\end{table}
+
+% Ajout d'une image
+\subsection{Graphique complémentaire}
+Voici un exemple d'insertion d'une image :
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{logos/centrale.png}
+    \caption{Légende de l'image}
+\end{figure}
+\end{appendices}
 
 \end{document}
